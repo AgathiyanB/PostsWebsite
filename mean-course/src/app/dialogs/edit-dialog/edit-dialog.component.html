@@ -1,0 +1,9 @@
+<h1 mat-dialog-header>Edit post</h1>
+<textarea
+  matInput
+  [(ngModel)]="content"></textarea>
+<mat-action-row>
+  <button mat-raised-button class="good-button" (click)="dialogRef.close({ content: content })">Confirm</button>
+  <button mat-raised-button class="bad-button" (click)="dialogRef.close({})">Cancel</button>
+</mat-action-row>
+
