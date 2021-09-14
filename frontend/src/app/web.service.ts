@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
-
-
 export class WebService {
   readonly ROOT_URL;
 
   constructor(private http : HttpClient) {
-    this.ROOT_URL = "/api";
+    this.ROOT_URL = environment.apiURL;
   }
 
   get<Type>(uri: string) {

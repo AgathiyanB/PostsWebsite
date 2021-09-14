@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
+import { DeleteDialogComponent } from '../dialogs/delete-dialog/delete-dialog.component';
+import { EditDialogComponent } from '../dialogs/edit-dialog/edit-dialog.component';
+import { Post } from './post.model';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EditDialogComponent } from './dialogs/edit-dialog/edit-dialog.component';
-import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
-import { PostService } from './posts/post.service';
-import { Post } from './posts/post.model';
+import { PostService } from './post.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-post',
+  templateUrl: './post.component.html',
+  styleUrls: ['./post.component.css']
 })
-export class AppComponent {
-  title = 'Agi\'s first website'
+export class PostComponent{
 
   constructor(public dialog: MatDialog,public PostService: PostService) {
   }

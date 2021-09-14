@@ -7,6 +7,7 @@
         name="title"
         ngModel
         required
+        maxlength="50"
         placeholder="Title"
         #title="ngModel">
         <mat-error *ngIf="title.invalid">Title is required</mat-error>

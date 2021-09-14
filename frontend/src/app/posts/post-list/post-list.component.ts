@@ -2,7 +2,7 @@ import { Component, Output, OnDestroy, EventEmitter } from "@angular/core";
 import { OnInit } from '@angular/core'
 import { Subscription } from "rxjs";
 
-import { PostsService } from "../posts.service";
+import { PostService } from "../post.service";
 
 import { Post } from '../post.model'
 
@@ -20,8 +20,8 @@ export class PostListComponent implements OnInit, OnDestroy {
   private postsSub: Subscription;
 
 
-  constructor(public postsService: PostsService) {
-    this.postsSub = this.postsService.getPostUpdateListener()
+  constructor(public PostService: PostService) {
+    this.postsSub = this.PostService.getPostUpdateListener()
       .subscribe((posts: Post[]) => {
         this.posts = posts
       });
@@ -36,7 +36,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.posts = this.postsService.getPosts()
+    this.posts = this.PostService.getPosts()
   }
 
   ngOnDestroy() {

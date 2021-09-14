@@ -1,7 +1,6 @@
 :host {
   display: 'block';
-  margin: 1em;
-  width: 80%;
+  margin: 10px;
 }
 
 .info-text {

@@ -18,6 +18,8 @@ import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
 import { EditDialogComponent } from './dialogs/edit-dialog/edit-dialog.component';
+import { PostComponent } from './posts/post.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { EditDialogComponent } from './dialogs/edit-dialog/edit-dialog.component
     HeaderComponent,
     PostListComponent,
     DeleteDialogComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    PostComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

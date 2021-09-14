@@ -1,12 +1,35 @@
-const express = require('express');
-const app = express();
+const express = require('express'),
+      app = express(),
+      server = require('http').createServer(app)
+      io = require('socket.io')(server, {
+          cors: "*"
+      }),
 app.use(express.json());
 
 const mongoose = require('./database/mongoose')
-const Post = require('./database/models/post')
+const Post = require('./database/models/post');
+const { Socket } = require('socket.io');
+
+const sockets = new Set();
+
+io.on('connection', socket => {
+    sockets.add(socket);
+    console.log(`Socket ${socket.id} added`);
+
+    socket.on('posts-updated', () => {
+        Post.find({}).then(posts => {
+            console.log(posts)
+            socket.send(posts)
+        })
+    });
+
+    socket.on('disconnect', () => {
+        console.log(`Deleting socket: ${socket.id}`)
+        sockets.delete(socket);
+    })
+})
 
 /*
-CORS - Cross Origin Request Security.
 localhost:3000 is backend
 localhost:4200 is frontend
 */
@@ -43,7 +66,10 @@ app.get('/posts/:postId', (req, res) => {
 app.post('/posts', (req,res) => {
     (new Post({ 'title': req.body.title, 'content': req.body.content}))
         .save()
-        .then((post) =>  res.send(post))
+        .then((post) =>  {
+            sockets.forEach(s => s.emit('posts-updated'))
+            res.send(post)
+        })
         .catch((error) => {
             console.log(error);
             res.status(400).send({
@@ -54,7 +80,10 @@ app.post('/posts', (req,res) => {
 
 app.put('/posts/:postId', (req, res) => {
     Post.findOneAndUpdate({ '_id': req.params.postId }, { $set: req.body }, { new: true })
-        .then((post) =>  res.send(post))
+        .then((post) =>  {
+            sockets.forEach(s => s.emit('posts-updated'))
+            res.send(post)
+        })
         .catch((error) => {
             console.log(error);
             res.status(400).send({
@@ -65,8 +94,11 @@ app.put('/posts/:postId', (req, res) => {
 
 app.delete('/posts/:postId', (req, res) => {
     Post.findByIdAndDelete(req.params.postId)
-        .then((post) => res.send(post))
-        .catch((error) => {
+        .then((post) =>  {
+            sockets.forEach(s => s.emit('posts-updated'))
+            res.send(post)
+        })
+            .catch((error) => {
             console.log(error);
             res.status(400).send({
                 message: "Bad request"
@@ -74,4 +106,4 @@ app.delete('/posts/:postId', (req, res) => {
         })
 });
 
-app.listen(3000, () => console.log("Server Connected"))
+server.listen(3000, () => console.log("Server Connected"))
