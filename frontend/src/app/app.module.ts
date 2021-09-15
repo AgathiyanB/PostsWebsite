@@ -1,4 +1,6 @@
 import { WebService } from './web.service';
+import { SocketService } from './socket.service';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -45,7 +47,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HttpClientModule,
     MatDialogModule
   ],
-  providers: [WebService],
+  providers: [WebService,SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

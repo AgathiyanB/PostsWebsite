@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Post } from './post.model'
+
 import { WebService } from '../web.service';
-import { io } from 'socket.io-client';
-import { environment } from 'src/environments/environment';
+import { SocketService } from '../socket.service';
 
 @Injectable({providedIn: 'root'})
 export class PostService {
@@ -11,8 +11,8 @@ export class PostService {
   private postsUpdated = new Subject<Post[]>();
   private socket;
 
-  constructor(private webService: WebService) {
-    this.socket = io(environment.socketUrl)
+  constructor(private webService: WebService, private socketService: SocketService) {
+    this.socket = socketService.getSocket('',{})
     this.socket.on('posts-updated', () => {
       this._updatePostsList()
     })

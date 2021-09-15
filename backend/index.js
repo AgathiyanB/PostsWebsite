@@ -1,3 +1,5 @@
+//In production, CORS is not needed and in fact not preferable
+
 const express = require('express'),
       app = express(),
       server = require('http').createServer(app)
