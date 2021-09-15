@@ -23,7 +23,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   constructor(public PostService: PostService) {
     this.postsSub = this.PostService.getPostUpdateListener()
       .subscribe((posts: Post[]) => {
-        this.posts = posts
+        this.posts = posts.reverse()
       });
   }
 
@@ -36,7 +36,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.posts = this.PostService.getPosts()
+    this.posts = this.PostService.getPosts().reverse()
   }
 
   ngOnDestroy() {
