@@ -12,7 +12,7 @@ export class PostService {
   private socket;
 
   constructor(private webService: WebService) {
-    this.socket = io(environment.apiURL)
+    this.socket = io(environment.socketUrl)
     this.socket.on('posts-updated', () => {
       this._updatePostsList()
     })

@@ -8,7 +8,6 @@ app.use(express.json());
 
 const mongoose = require('./database/mongoose')
 const Post = require('./database/models/post');
-const { Socket } = require('socket.io');
 
 const sockets = new Set();
 
