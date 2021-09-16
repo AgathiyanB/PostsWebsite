@@ -22,6 +22,9 @@ import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.com
 import { EditDialogComponent } from './dialogs/edit-dialog/edit-dialog.component';
 import { PostComponent } from './posts/post.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { RegisterComponent } from './authentication/register/register.component';
+import { LoginEntryComponent } from './authentication/login-entry/login-entry.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
     DeleteDialogComponent,
     EditDialogComponent,
     PostComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoginComponent,
+    RegisterComponent,
+    LoginEntryComponent
   ],
   imports: [
     BrowserModule,
