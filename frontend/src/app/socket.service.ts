@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { io } from 'socket.io-client';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'

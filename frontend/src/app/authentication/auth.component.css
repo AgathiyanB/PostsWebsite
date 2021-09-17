@@ -1,0 +1,17 @@
+div {
+  width: 20em;
+  margin: 2em auto;
+  padding: 1em;
+  border-radius: 0.4em;
+  background-color: #f1f1f1;
+  border: 0.2em solid #222222
+}
+
+h1 {
+  text-align: left;
+  color: #ffffff;
+  background-color: #9a9a9a;
+  border-radius: 0.2em;
+  padding: 0.1em;
+  border: 0.1em solid #222222
+}
