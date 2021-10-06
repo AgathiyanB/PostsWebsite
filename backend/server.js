@@ -36,4 +36,6 @@ localhost:4200 is frontend
 
 app.use('/posts', require('./posts/posts.controller')(sockets))
 
+app.use('/users', require('./users/users.controller'))
+
 server.listen(3000, () => console.log("Server Connected"))

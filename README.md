@@ -9,3 +9,5 @@ Project based on following video https://www.youtube.com/watch?v=1tRLveSyNz8, an
 - live post feed using sockets
 - app routing (so far just a "this page not found page")
 - and more on the way!
+
+reverse-proxy stores the nginx config file.
