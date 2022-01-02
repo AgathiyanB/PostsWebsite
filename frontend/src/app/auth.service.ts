@@ -20,16 +20,26 @@ export class AuthService {
 
   }
 
-  register(username: string, password: string) {
-    this.webService.post<AuthReturn>('users/register', { "username": username, "password": password }).subscribe(
-      res => {this.login(username,password)},
-      (err : HttpErrorResponse) => {err.status});
+  async register(username: string, password: string) {
+    try {
+      const res = await this.webService.post<AuthReturn>('users/register', { "username": username, "password": password }).toPromise();
+      this.login(username,password)
+      return true
+    }
+    catch(err) {
+      return false
+    }
   }
 
-  login(username: string, password: string) {
-    this.webService.post<AuthReturn>('users/authenticate', { "username": username, "password": password }).subscribe(
-      res => {this.setSession(res,username)},
-      (err : HttpErrorResponse) => {err.status});
+  async login(username: string, password: string) {
+    try {
+      const res = await this.webService.post<AuthReturn>('users/authenticate', { "username": username, "password": password }).toPromise();
+      this.setSession(res,username);
+      return true
+    }
+    catch(err) {
+      return false
+    }
   }
 
   private setSession(authReturn: AuthReturn, user: string) {
@@ -38,11 +48,14 @@ export class AuthService {
     sessionStorage.setItem('expiresAt',moment().add(authReturn.expiresInSeconds,'second').format());
     this.token = authReturn.token;
     this.expiresAt = moment().add(authReturn.expiresInSeconds,'second');
-    this.user = user
+    this.user = user;
   }
 
   logout() {
-    this.token = null
+    sessionStorage.clear()
+    this.token = null;
+    this.expiresAt = moment(null);
+    this.user = null;
   }
 
   isAuthenticated() {

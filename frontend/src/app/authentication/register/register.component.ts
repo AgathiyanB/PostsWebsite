@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -7,12 +8,28 @@ import { AuthService } from 'src/app/auth.service';
   styleUrls: ['../auth.component.css']
 })
 export class RegisterComponent {
+  errorCode = 0 //0 is no error, 1 is empty username, 2 is username taken
 
-  constructor(public authService: AuthService) {
-
+  constructor(private router: Router, public authService: AuthService) {
+    if(authService.isAuthenticated()) {
+      this.router.navigate(['/'])
+    }
   }
 
   register(username: string,password: string) {
-    this.authService.register(username,password);
+    if(username == '') {
+      this.errorCode = 1
+    }
+    else {
+      this.authService.register(username,password).then((b) => {
+        if(b) {
+          this.errorCode = 0
+          this.router.navigate(['/'])
+        }
+        else {
+          this.errorCode = 2
+        }
+      })
+    }
   }
 }

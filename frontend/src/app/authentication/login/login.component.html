@@ -1,6 +1,7 @@
-<div class="center">
+<div class="center container">
   <h1>Login</h1>
   <app-login-entry #entry></app-login-entry>
   <button mat-raised-button class="good-button" type="button" (click)="login(entry.getUsername(),entry.getPassword())">Login</button>
   <button mat-button type="button" routerLink='/register'>Register</button>
+  <div class="error-text" *ngIf="showError">Username or Password incorrect</div>
 </div>

@@ -1,10 +1,15 @@
-div {
+.container {
   width: 20em;
   margin: 2em auto;
   padding: 1em;
   border-radius: 0.4em;
   background-color: #f1f1f1;
   border: 0.2em solid #222222
+}
+
+.error-text {
+  color: crimson;
+  font-size: 1em;
 }
 
 h1 {

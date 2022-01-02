@@ -1,6 +1,8 @@
-<div class="center">
+<div class="center container">
   <h1>Register</h1>
   <app-login-entry #entry></app-login-entry>
   <button mat-button class="good-button" type="button" (click)="register(entry.getUsername(),entry.getPassword())">Register</button>
   <button mat-button type="button" routerLink='/login'>Cancel</button>
+  <div class="error-text" *ngIf="errorCode == 1">Enter a username</div>
+  <div class="error-text" *ngIf="errorCode == 2">Username already taken</div>
 </div>
