@@ -18,7 +18,7 @@ module.exports = function (sockets) {
             .catch((error) => {
                 console.log(error);
                 res.status(400).send({
-                    message: "List doesn't exist"
+                    message: "Post doesn't exist"
                 })
             })
     });

@@ -42,4 +42,16 @@ router.post('/register',(req,res) => {
     })
 })
 
+router.get('/:userId', (req, res) => {
+    User.findOne({ 'id': req.params.userId })
+        .then(user => {res.send(user)})
+        .catch((error) => {
+            console.log(error);
+            res.status(400).send({
+                message: "User doesn't exist"
+            })
+        })
+});
+
+
 module.exports = router;
