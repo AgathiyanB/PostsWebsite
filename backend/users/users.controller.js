@@ -10,7 +10,7 @@ router.post('/authenticate',(req, res) => {
     User.findOne({ 'username': req.body.username }).then((user) => {
         if(user && bcrypt.compareSync(req.body.password, user.hash)) {
             const token = jwt.sign({ userId: user.id, admin: user.admin }, config.secret, { expiresIn: '7d' })
-            res.send(token)
+            res.send({ token: token, expiresInSeconds: 604800 })
         }
         else {
             res.status(400).send({ message: 'Username or password is incorrect' })

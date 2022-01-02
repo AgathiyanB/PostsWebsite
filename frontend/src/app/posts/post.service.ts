@@ -4,6 +4,7 @@ import { Post } from './post.model'
 
 import { WebService } from '../web.service';
 import { SocketService } from '../socket.service';
+import { AuthService } from '../auth.service';
 
 @Injectable({providedIn: 'root'})
 export class PostService {

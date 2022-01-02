@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent {
 
-  constructor() { }
+  constructor(public authService: AuthService) {
+
+  }
 
   register(username: string,password: string) {
+    this.authService.register(username,password);
   }
 }

@@ -1,1 +1,11 @@
-<mat-toolbar color="primary">My App</mat-toolbar>
+<mat-toolbar color="primary">
+  <h1 routerLink='/'>Japes</h1>
+  <span class="spacer"></span>
+  <div *ngIf="authService.isAuthenticated();else isLoggedOut">
+    <button mat-button (click)="logout()">Logout</button>
+    <h2>{{authService.user}}</h2>
+  </div>
+  <ng-template #isLoggedOut>
+    <button mat-button routerLink="/login">Login</button>
+  </ng-template>
+</mat-toolbar>

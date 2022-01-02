@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog'
 
 import { AppComponent } from './app.component';
@@ -25,6 +25,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { LoginEntryComponent } from './authentication/login-entry/login-entry.component';
+import { AuthService } from './auth.service';
+import { AuthInterceptor } from './interceptor.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,10 @@ import { LoginEntryComponent } from './authentication/login-entry/login-entry.co
     HttpClientModule,
     MatDialogModule
   ],
-  providers: [WebService,SocketService],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    WebService,
+    SocketService,
+    AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
